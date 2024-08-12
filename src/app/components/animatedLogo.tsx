@@ -30,7 +30,7 @@ const AnimatedLogo = ({ style }: { style?: React.CSSProperties }) => {
         grid.push({
           color: colors[Math.floor(Math.random() * colors.length)],
           size: circleSize,
-          x: col * (circleSize + circleSpacing) - 20,
+          x: col * (circleSize + circleSpacing) - 30,
           y: row * (circleSize + circleSpacing) - 30,
           key: `${row}-${col}`,
         });
@@ -44,6 +44,7 @@ const AnimatedLogo = ({ style }: { style?: React.CSSProperties }) => {
     if (isHovered) {
       setCircles(generateCircles());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHovered]);
 
   return (

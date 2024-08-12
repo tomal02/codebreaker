@@ -5,12 +5,22 @@ import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./home.module.css";
 import Login from "./components/modals/login";
+import { useAuth } from "./contexts/authContext";
 
 export default function Home() {
+  const { isAuthenticated, logout } = useAuth();
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const handleAuthAction = () => {
+    if (isAuthenticated) {
+      logout();
+    } else {
+      toggleModal();
+    }
   };
 
   return (
@@ -27,8 +37,8 @@ export default function Home() {
         </div>
         <h1 className={styles.title}>Code Breaker</h1>
         <div className={styles.buttonContainer}>
-          <button onClick={toggleModal} className={styles.button}>
-            Log in
+          <button onClick={handleAuthAction} className={styles.button}>
+            {isAuthenticated ? "Log out" : "Log in"}
           </button>
           <Link href="/play" className={`${styles.button} ${styles.play}`}>
             Play

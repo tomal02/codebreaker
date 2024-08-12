@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faChartBar } from "@fortawesome/free-solid-svg-icons";
-
+import { useAuth } from "../contexts/authContext";
 import styles from "./nav.module.css";
 import AnimatedLogo from "./animatedLogo";
 import Login from "./modals/login";
@@ -14,6 +13,7 @@ import Profile from "./modals/profile";
 import Settings from "./modals/settings";
 
 export default function Navbar() {
+  const { isAuthenticated, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isStatsModalOpen, setStatsModalOpen] = useState(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -41,10 +41,8 @@ export default function Navbar() {
     };
   }, []);
 
-  const isAuthenticated = false;
-
   const handleLogout = () => {
-    console.log("Logged out");
+    logout();
   };
 
   return (
@@ -56,13 +54,6 @@ export default function Navbar() {
           </Link>
         </div>
         <div className={styles.menuContainer}>
-          <button
-            className={styles.statsButton}
-            onClick={() => setStatsModalOpen(true)}
-          >
-            <FontAwesomeIcon icon={faChartBar} />
-            Stats
-          </button>
           <div className={styles.profileWrapper} ref={dropdownRef}>
             <div className={styles.profileIcon} onClick={toggleDropdown}>
               <FontAwesomeIcon icon={faUser} />
@@ -103,6 +94,15 @@ export default function Navbar() {
                     </button>
                     <button
                       onClick={() => {
+                        setStatsModalOpen(true);
+                        setDropdownOpen(false);
+                      }}
+                      className={styles.dropdownItem}
+                    >
+                      Stats
+                    </button>
+                    <button
+                      onClick={() => {
                         setSettingsModalOpen(true);
                         setDropdownOpen(false);
                       }}
@@ -125,7 +125,6 @@ export default function Navbar() {
       </nav>
 
       {/* Modals */}
-
       <Stats
         showModal={isStatsModalOpen}
         toggleModal={() => setStatsModalOpen(false)}

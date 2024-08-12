@@ -1,0 +1,15 @@
+.playContainer {
+    display: flex;
+    justify-content: center;
+    background-color: #222;
+    align-items: flex-start;
+    height: 100vh;
+}
+
+.boardContainer {
+    max-width: 75%;
+    align-items: center;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}

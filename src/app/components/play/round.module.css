@@ -1,0 +1,43 @@
+.roundContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.colorPegsContainer {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.colorPegs {
+    display: flex;
+    gap: 30px;
+}
+
+.colorPeg {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #222;
+    cursor: pointer;
+}
+
+.feedbackPegsContainer {
+    background-color: #444;
+    padding: 18px;
+    border-radius: 20px;
+}
+
+.feedbackPegs {
+    display: grid;
+    gap: 15px;
+}
+
+.feedbackPeg {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #222;
+}

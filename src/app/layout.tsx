@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ height: "100%", margin: 0, overflow: "hidden" }}>
       <AuthProvider>
         <body className={inter.className}>
           <div

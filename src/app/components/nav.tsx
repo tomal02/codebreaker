@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faChartBar } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../contexts/authContext";
 import styles from "./nav.module.css";
 import AnimatedLogo from "./animatedLogo";

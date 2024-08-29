@@ -18,37 +18,28 @@ const Modal: React.FC<ModalProps> = ({
   width,
   height,
 }) => {
-  const [isDragging, setIsDragging] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (modalRef.current?.contains(e.target as Node)) {
-      setIsDragging(true);
-    } else {
-      onClose();
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
+  const [isVisible, setIsVisible] = useState(isOpen);
+  const [shouldRender, setShouldRender] = useState(isOpen);
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener("mouseup", handleMouseUp);
-      return () => {
-        document.removeEventListener("mouseup", handleMouseUp);
-      };
+      setIsVisible(true);
+      setShouldRender(true);
+    } else {
+      setIsVisible(false);
+      setTimeout(() => setShouldRender(false), 500); // Wait for fade-out to complete before unmounting
     }
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
 
   return (
-    <div className={styles.modalOverlay} onMouseDown={handleMouseDown}>
+    <div
+      className={`${styles.modalOverlay} ${!isVisible ? styles.fadeOut : ""}`}
+      onMouseDown={onClose}
+    >
       <div
         className={styles.modalContent}
-        ref={modalRef}
         onMouseDown={(e) => e.stopPropagation()}
         style={{
           width: width || "auto",
